@@ -31,7 +31,7 @@ class Boat(object):
 
         self._cached_heading = 0
         self._cached_wind_speed = 0
-        self._cached_wind_direction = 0
+        self._cached_relative_wind_direction = 0
         self._cached_position = (0, 0)
         self._cached_rudder_position = 0
         self._cached_sail_position = 0
@@ -52,8 +52,8 @@ class Boat(object):
             try:
                 self._cached_heading = self.driver.heading()
                 self._cached_wind_speed = self.driver.wind_speed()
-                self._cached_wind_direction = \
-                    self._get_wind_average(self.driver.wind_direction())
+                self._cached_relative_wind_direction = \
+                    self._get_wind_average(self.driver.relative_wind_direction())
                 self._cached_position = self.driver.position()
             except Exception as e:
                 log.error('Got error when trying to update sensor values: '
@@ -70,8 +70,8 @@ class Boat(object):
     def wind_speed(self):
         return self._cached_wind_speed
 
-    def wind_direction(self):
-        return self._cached_wind_direction
+    def relative_wind_direction(self):
+        return self._cached_relative_wind_direction
 
     def position(self):
         return self._cached_position

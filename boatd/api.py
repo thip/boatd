@@ -59,7 +59,7 @@ class BoatdHTTPServer(ThreadingMixIn, HTTPServer):
         self.handles = {
             '/': self.boatd_info,
             '/boat': self.boat_attr,
-            '/wind': self.wind,
+            '/relative_wind': self.relative_wind,
             '/active': self.boat_active,
             '/behaviours': self.behaviours,
             '/waypoints': self.waypoints,
@@ -113,14 +113,14 @@ class BoatdHTTPServer(ThreadingMixIn, HTTPServer):
 
         return self.behaviours()
 
-    def wind(self):
+    def relative_wind(self):
         try:
             speed = self.boat.wind_speed()
         except (AttributeError, TypeError):
             speed = -1
 
         try:
-            return {'direction': self.boat.wind_direction(),
+            return {'direction': self.boat.relative_wind_direction(),
                     'speed': speed}
         except AttributeError:
             log.exception('Error when attempting to read wind direction')

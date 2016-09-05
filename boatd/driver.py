@@ -43,10 +43,10 @@ class BaseBoatdDriver(object):
         pass
 
     @abstractmethod
-    def wind_direction(self):
+    def relative_wind_direction(self):
         '''
         Must return the direction the wind is blowing in degrees, relative to
-        the world.
+        the front of the boat.
 
         :rtype: float between 0 and 360
         '''
